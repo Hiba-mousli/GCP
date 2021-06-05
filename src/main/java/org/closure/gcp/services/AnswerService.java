@@ -43,10 +43,10 @@ public class AnswerService {
                                                                      .question(questionEntity.getQuestion()));
     }
 
-    public AnswerModel ReadAnswer (int id) throws AnswerException
+    public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
     {
-        AnswerEntity answer = answerRepo
-            .findById(id)
+        AnswerEntity answerEntity = answerRepo
+            .findById(answer.getId())
             .orElseThrow(
                 ()-> new AnswerException("Unable to find an answer to this number ..."));
         
@@ -60,15 +60,15 @@ public class AnswerService {
     }
 
 
-public AnswerModel updateAnswer (int id) throws AnswerException
+public AnswerModel updateAnswer (AnswerModel answer) throws AnswerException
 {
-    AnswerEntity answer = answerRepo
-            .findById(id)
+    AnswerEntity answereEntity = answerRepo
+            .findById(answer.getId())
             .orElseThrow(
                 ()-> new AnswerException("Unable to find an answer to this number ..."));
-     QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
+QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
 
-         answer = answerRepo.save(
+         answereEntity = answerRepo.save(
         new AnswerEntity().answer(answer.getAnswer())
                           .status(answer.getStatus()));
     return new AnswerModel().id(answer.getId()).question(new QuestionModel().id(questionEntity.getId())
@@ -76,14 +76,13 @@ public AnswerModel updateAnswer (int id) throws AnswerException
                                                                  .question(questionEntity.getQuestion()));
 }
 
-public void DeleteAnswer(int id) throws AnswerException
+public void DeleteAnswer(AnswerModel answer) throws AnswerException
     {
-        AnswerEntity answer = answerRepo
-        .findById(id)
+        AnswerEntity answereEntity = answerRepo
+        .findById(answer.getId())
         .orElseThrow(
             ()-> new AnswerException("Unable to find an answer to this number ..."));
-            answerRepo.delete(answer);
+            answerRepo.delete(answereEntity);
             System.out.println("The answer was successfully deleted");
 }
-
 }

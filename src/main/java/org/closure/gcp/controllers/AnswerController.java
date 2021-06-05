@@ -30,5 +30,8 @@ public class AnswerController {
             return e.getMessage();
         }
     }
-    
+    @RequestMapping(value="/readanswer", method=RequestMethod.POST)
+    public Object requestMethd(@RequestBody AnswerModel answer) {
+        return answerService.ReadAnswer(answer);
+    }
 }
