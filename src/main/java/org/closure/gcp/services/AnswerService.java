@@ -7,7 +7,6 @@ import org.closure.gcp.models.AnswerModel;
 import org.closure.gcp.models.QuestionModel;
 import org.closure.gcp.repositories.AnswerRepo;
 import org.closure.gcp.repositories.QuestionRepo;
-import org.hibernate.cfg.QuerySecondPass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,15 +44,16 @@ public class AnswerService {
 
     public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
     {
+        
         AnswerEntity answerEntity = answerRepo
-            .findById(answer.getId())
+            .findById(answer.getId()) 
             .orElseThrow(
-                ()-> new AnswerException("Unable to find an answer to this number ..."));
+                ()-> new AnswerException("Unable to find an answer to this number .."));
         
         QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
-        return new AnswerModel().id(answer.getId())
-                                .answer(answer.getAnswer())
-                                .status(answer.getStatus())
+        return new AnswerModel().id(answerEntity.getId())
+                                .answer(answerEntity.getAnswer())
+                                .status(answerEntity.getStatus())
                                 .question(new QuestionModel().id(questionEntity.getId())
                                                              .pionts(questionEntity.getpoints())
                                                              .question(questionEntity.getQuestion()));
@@ -69,9 +69,9 @@ public AnswerModel updateAnswer (AnswerModel answer) throws AnswerException
 QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
 
          answereEntity = answerRepo.save(
-        new AnswerEntity().answer(answer.getAnswer())
-                          .status(answer.getStatus()));
-    return new AnswerModel().id(answer.getId()).question(new QuestionModel().id(questionEntity.getId())
+        new AnswerEntity().answer(answereEntity.getAnswer())
+                          .status(answereEntity.getStatus()));
+    return new AnswerModel().id(answereEntity.getId()).question(new QuestionModel().id(questionEntity.getId())
                                                                  .pionts(questionEntity.getpoints())
                                                                  .question(questionEntity.getQuestion()));
 }
@@ -83,6 +83,6 @@ public void DeleteAnswer(AnswerModel answer) throws AnswerException
         .orElseThrow(
             ()-> new AnswerException("Unable to find an answer to this number ..."));
             answerRepo.delete(answereEntity);
-            System.out.println("The answer was successfully deleted");
+
 }
 }
