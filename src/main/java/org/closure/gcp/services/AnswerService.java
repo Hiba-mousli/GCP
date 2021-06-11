@@ -30,16 +30,21 @@ public class AnswerService {
 
     public AnswerModel createAnswerWithQuestion(AnswerModel answer, String question) throws AnswerException
     {
-        QuestionEntity questionEntity = questionRepo
+        QuestionEntity questionEntity = new QuestionEntity();
+        questionEntity.setQuestion(question);
+        
+        questionEntity = questionRepo
             .findByQuestion(question)
             .orElseThrow(
                 ()-> new AnswerException("no question with this value"));
          AnswerEntity entity = answerRepo.save(
             new AnswerEntity().answer(answer.getAnswer())
                               .status(answer.getStatus()));
+
         return answer.id(entity.getId()).question(new QuestionModel().id(questionEntity.getId())
-                                                                     .pionts(questionEntity.getpoints())
-                                                                     .question(questionEntity.getQuestion()));
+                                                                     .points(questionEntity.getpoints())
+                                                                     .question(questionEntity.getQuestion()));                                                   
+                                                                
     }
 
     public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
@@ -55,7 +60,7 @@ public class AnswerService {
                                 .answer(answerEntity.getAnswer())
                                 .status(answerEntity.getStatus())
                                 .question(new QuestionModel().id(questionEntity.getId())
-                                                             .pionts(questionEntity.getpoints())
+                                                             .points(questionEntity.getpoints())
                                                              .question(questionEntity.getQuestion()));
     }
 
@@ -72,7 +77,7 @@ QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion(
         new AnswerEntity().answer(answereEntity.getAnswer())
                           .status(answereEntity.getStatus()));
     return new AnswerModel().id(answereEntity.getId()).question(new QuestionModel().id(questionEntity.getId())
-                                                                 .pionts(questionEntity.getpoints())
+                                                                 .points(questionEntity.getpoints())
                                                                  .question(questionEntity.getQuestion()));
 }
 
@@ -84,5 +89,5 @@ public void DeleteAnswer(AnswerModel answer) throws AnswerException
             ()-> new AnswerException("Unable to find an answer to this number ..."));
             answerRepo.delete(answereEntity);
 
-}
+    }
 }

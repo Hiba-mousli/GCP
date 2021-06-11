@@ -114,6 +114,9 @@ public class AnswerEntity {
             "}";
     }
 
+    public void setPoints(int points) {
+    }
+
 
 
 }

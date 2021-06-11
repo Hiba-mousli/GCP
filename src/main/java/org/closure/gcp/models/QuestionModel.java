@@ -1,5 +1,6 @@
 package org.closure.gcp.models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class QuestionModel {
@@ -8,18 +9,21 @@ public class QuestionModel {
     private String question;
     private String question_type;
     private String sup_file;
-    private int pionts;
-
+    private int points;
+    private List<ContestModel> contest;
+    private List<AnswerModel> answer;
 
     public QuestionModel() {
     }
 
-    public QuestionModel(Integer id, String question, String question_type, String sup_file, int pionts) {
+    public QuestionModel(Integer id, String question, String question_type, String sup_file, int points, List<ContestModel> contest, List<AnswerModel> answer) {
         this.id = id;
         this.question = question;
         this.question_type = question_type;
         this.sup_file = sup_file;
-        this.pionts = pionts;
+        this.points = points;
+        this.contest = contest;
+        this.answer = answer;
     }
 
     public Integer getId() {
@@ -54,12 +58,28 @@ public class QuestionModel {
         this.sup_file = sup_file;
     }
 
-    public int getPionts() {
-        return this.pionts;
+    public int getPoints() {
+        return this.points;
     }
 
-    public void setPionts(int pionts) {
-        this.pionts = pionts;
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public List<ContestModel> getContest() {
+        return this.contest;
+    }
+
+    public void setContest(List<ContestModel> contest) {
+        this.contest = contest;
+    }
+
+    public List<AnswerModel> getanswer() {
+        return this.answer;
+    }
+
+    public void setanswer(List<AnswerModel> answer) {
+        this.answer = answer;
     }
 
     public QuestionModel id(Integer id) {
@@ -82,8 +102,18 @@ public class QuestionModel {
         return this;
     }
 
-    public QuestionModel pionts(int pionts) {
-        setPionts(pionts);
+    public QuestionModel points(int points) {
+        setPoints(points);
+        return this;
+    }
+
+    public QuestionModel contest(List<ContestModel> contest) {
+        setContest(contest);
+        return this;
+    }
+
+    public QuestionModel answer(List<AnswerModel> answer) {
+        setanswer(answer);
         return this;
     }
 
@@ -95,12 +125,12 @@ public class QuestionModel {
             return false;
         }
         QuestionModel questionModel = (QuestionModel) o;
-        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(sup_file, questionModel.sup_file) && pionts == questionModel.pionts;
+        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(sup_file, questionModel.sup_file) && points == questionModel.points && Objects.equals(contest, questionModel.contest) && Objects.equals(answer, questionModel.answer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, question, question_type, sup_file, pionts);
+        return Objects.hash(id, question, question_type, sup_file, points, contest, answer);
     }
 
     @Override
@@ -110,9 +140,10 @@ public class QuestionModel {
             ", question='" + getQuestion() + "'" +
             ", question_type='" + getQuestion_type() + "'" +
             ", sup_file='" + getSup_file() + "'" +
-            ", pionts='" + getPionts() + "'" +
+            ", points='" + getPoints() + "'" +
+            ", contest='" + getContest() + "'" +
+            ", answer='" + getanswer() + "'" +
             "}";
     }
-
-    
 }
+   
