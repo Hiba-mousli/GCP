@@ -64,7 +64,7 @@ public class ConvertService {
         public List<AnswerEntity> convertToListEntity (List<AnswerModel> model){
             List<AnswerEntity> entity = new ArrayList<>();
             for (AnswerModel answermModel : model ) {
-                AnswerEntity answer = new AnswerEntity(answermModel.getId(),answermModel.getQuestion(),answermModel.getStatus(),
+                AnswerEntity answer = new AnswerEntity(answermModel.getId(),convertToEntity(answermModel.getQuestion()),answermModel.getStatus(),
                 answermModel.getAnswer());
                 entity.add(answer);
             }  

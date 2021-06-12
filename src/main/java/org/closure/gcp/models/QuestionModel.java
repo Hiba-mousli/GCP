@@ -11,19 +11,20 @@ public class QuestionModel {
     private String sup_file;
     private int points;
     private List<ContestModel> contest;
-    private List<AnswerModel> answer;
+    private List<AnswerModel> answers;
+
 
     public QuestionModel() {
     }
 
-    public QuestionModel(Integer id, String question, String question_type, String sup_file, int points, List<ContestModel> contest, List<AnswerModel> answer) {
+    public QuestionModel(Integer id, String question, String question_type, String sup_file, int points, List<ContestModel> contest, List<AnswerModel> answers) {
         this.id = id;
         this.question = question;
         this.question_type = question_type;
         this.sup_file = sup_file;
         this.points = points;
         this.contest = contest;
-        this.answer = answer;
+        this.answers = answers;
     }
 
     public Integer getId() {
@@ -74,12 +75,12 @@ public class QuestionModel {
         this.contest = contest;
     }
 
-    public List<AnswerModel> getanswer() {
-        return this.answer;
+    public List<AnswerModel> getAnswers() {
+        return this.answers;
     }
 
-    public void setanswer(List<AnswerModel> answer) {
-        this.answer = answer;
+    public void setAnswers(List<AnswerModel> answers) {
+        this.answers = answers;
     }
 
     public QuestionModel id(Integer id) {
@@ -112,8 +113,8 @@ public class QuestionModel {
         return this;
     }
 
-    public QuestionModel answer(List<AnswerModel> answer) {
-        setanswer(answer);
+    public QuestionModel answers(List<AnswerModel> answers) {
+        setAnswers(answers);
         return this;
     }
 
@@ -125,12 +126,12 @@ public class QuestionModel {
             return false;
         }
         QuestionModel questionModel = (QuestionModel) o;
-        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(sup_file, questionModel.sup_file) && points == questionModel.points && Objects.equals(contest, questionModel.contest) && Objects.equals(answer, questionModel.answer);
+        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(sup_file, questionModel.sup_file) && points == questionModel.points && Objects.equals(contest, questionModel.contest) && Objects.equals(answers, questionModel.answers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, question, question_type, sup_file, points, contest, answer);
+        return Objects.hash(id, question, question_type, sup_file, points, contest, answers);
     }
 
     @Override
@@ -142,8 +143,9 @@ public class QuestionModel {
             ", sup_file='" + getSup_file() + "'" +
             ", points='" + getPoints() + "'" +
             ", contest='" + getContest() + "'" +
-            ", answer='" + getanswer() + "'" +
+            ", answers='" + getAnswers() + "'" +
             "}";
     }
+  
 }
    
