@@ -49,8 +49,6 @@ public class QuestionEntity {
     @OneToMany(mappedBy ="question")
     private List<AnswerEntity> answers;
 
-
-
     public QuestionEntity() {
     }
 
@@ -114,11 +112,11 @@ public class QuestionEntity {
         this.sup_file = sup_file;
     }
 
-    public int getpoints() {
+    public int getPoints() {
         return this.points;
     }
 
-    public void setpoints(int points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -169,7 +167,7 @@ public class QuestionEntity {
     }
 
     public QuestionEntity points(int points) {
-        setpoints(points);
+        setPoints(points);
         return this;
     }
 
@@ -208,16 +206,11 @@ public class QuestionEntity {
             ", interest='" + getInterest() + "'" +
             ", level='" + getLevel() + "'" +
             ", sup_file='" + getSup_file() + "'" +
-            ", points='" + getpoints() + "'" +
+            ", points='" + getPoints() + "'" +
             ", contest='" + getContest() + "'" +
             ", answers='" + getAnswers() + "'" +
             "}";
     }
-    
-    
-
-
-
 
 
 }

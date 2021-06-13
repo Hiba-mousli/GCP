@@ -32,7 +32,7 @@ public class AnswerController {
         }
     }
     @RequestMapping(value="/readanswer", method=RequestMethod.POST)
-    public Object requestMethodRead(@RequestBody AnswerModel answer) {
+    public Object requestMethodRead(@RequestBody String answer) {
         try {
             return answerService.ReadAnswer(answer);
         } catch (AnswerException e) {

@@ -42,25 +42,25 @@ public class AnswerService {
                               .status(answer.getStatus()));
 
         return answer.id(entity.getId()).question(new QuestionModel().id(questionEntity.getId())
-                                                                     .points(questionEntity.getpoints())
+                                                                     .points(questionEntity.getPoints())
                                                                      .question(questionEntity.getQuestion()));                                                   
                                                                 
     }
 
-    public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
+    public AnswerModel ReadAnswer (String answer) throws AnswerException
     {
         
         AnswerEntity answerEntity = answerRepo
-            .findById(answer.getId()) 
+            .findByAnswer(answer) 
             .orElseThrow(
                 ()-> new AnswerException("Unable to find an answer to this number .."));
         
-        QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
+        QuestionEntity questionEntity = questionRepo.findByQuestion((answerEntity.getQuestion()).getQuestion()).orElse(new QuestionEntity());
         return new AnswerModel().id(answerEntity.getId())
                                 .answer(answerEntity.getAnswer())
                                 .status(answerEntity.getStatus())
                                 .question(new QuestionModel().id(questionEntity.getId())
-                                                             .points(questionEntity.getpoints())
+                                                             .points(questionEntity.getPoints())
                                                              .question(questionEntity.getQuestion()));
     }
 
@@ -71,14 +71,17 @@ public AnswerModel updateAnswer (AnswerModel answer) throws AnswerException
             .findById(answer.getId())
             .orElseThrow(
                 ()-> new AnswerException("Unable to find an answer to this number ..."));
-QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion()).orElse(new QuestionEntity());
+QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion())
+         .orElse(new QuestionEntity());
 
          answereEntity = answerRepo.save(
-        new AnswerEntity().answer(answereEntity.getAnswer())
-                          .status(answereEntity.getStatus()));
-    return new AnswerModel().id(answereEntity.getId()).question(new QuestionModel().id(questionEntity.getId())
-                                                                 .points(questionEntity.getpoints())
-                                                                 .question(questionEntity.getQuestion()));
+           new AnswerEntity().answer(answer.getAnswer())
+                          .status(answer.getStatus()));
+
+    return new AnswerModel().id(answereEntity.getId()).question(
+           new QuestionModel().id(questionEntity.getId())
+                              .points(questionEntity.getPoints())
+                              .question(questionEntity.getQuestion()));
 }
 
 public void DeleteAnswer(AnswerModel answer) throws AnswerException

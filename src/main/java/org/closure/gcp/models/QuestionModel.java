@@ -8,6 +8,8 @@ public class QuestionModel {
     private Integer id;
     private String question;
     private String question_type;
+    private InterestModel interest;
+    private LevelModel level;
     private String sup_file;
     private int points;
     private List<ContestModel> contest;
@@ -17,10 +19,12 @@ public class QuestionModel {
     public QuestionModel() {
     }
 
-    public QuestionModel(Integer id, String question, String question_type, String sup_file, int points, List<ContestModel> contest, List<AnswerModel> answers) {
+    public QuestionModel(Integer id, String question, String question_type, InterestModel interest, LevelModel level, String sup_file, int points, List<ContestModel> contest, List<AnswerModel> answers) {
         this.id = id;
         this.question = question;
         this.question_type = question_type;
+        this.interest = interest;
+        this.level = level;
         this.sup_file = sup_file;
         this.points = points;
         this.contest = contest;
@@ -49,6 +53,22 @@ public class QuestionModel {
 
     public void setQuestion_type(String question_type) {
         this.question_type = question_type;
+    }
+
+    public InterestModel getInterest() {
+        return this.interest;
+    }
+
+    public void setInterest(InterestModel interest) {
+        this.interest = interest;
+    }
+
+    public LevelModel getLevel() {
+        return this.level;
+    }
+
+    public void setLevel(LevelModel level) {
+        this.level = level;
     }
 
     public String getSup_file() {
@@ -98,6 +118,16 @@ public class QuestionModel {
         return this;
     }
 
+    public QuestionModel interest(InterestModel interest) {
+        setInterest(interest);
+        return this;
+    }
+
+    public QuestionModel level(LevelModel level) {
+        setLevel(level);
+        return this;
+    }
+
     public QuestionModel sup_file(String sup_file) {
         setSup_file(sup_file);
         return this;
@@ -126,12 +156,12 @@ public class QuestionModel {
             return false;
         }
         QuestionModel questionModel = (QuestionModel) o;
-        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(sup_file, questionModel.sup_file) && points == questionModel.points && Objects.equals(contest, questionModel.contest) && Objects.equals(answers, questionModel.answers);
+        return Objects.equals(id, questionModel.id) && Objects.equals(question, questionModel.question) && Objects.equals(question_type, questionModel.question_type) && Objects.equals(interest, questionModel.interest) && Objects.equals(level, questionModel.level) && Objects.equals(sup_file, questionModel.sup_file) && points == questionModel.points && Objects.equals(contest, questionModel.contest) && Objects.equals(answers, questionModel.answers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, question, question_type, sup_file, points, contest, answers);
+        return Objects.hash(id, question, question_type, interest, level, sup_file, points, contest, answers);
     }
 
     @Override
@@ -140,12 +170,13 @@ public class QuestionModel {
             " id='" + getId() + "'" +
             ", question='" + getQuestion() + "'" +
             ", question_type='" + getQuestion_type() + "'" +
+            ", interest='" + getInterest() + "'" +
+            ", level='" + getLevel() + "'" +
             ", sup_file='" + getSup_file() + "'" +
             ", points='" + getPoints() + "'" +
             ", contest='" + getContest() + "'" +
             ", answers='" + getAnswers() + "'" +
             "}";
     }
-  
+
 }
-   
