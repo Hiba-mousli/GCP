@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.closure.gcp.entities.CollegeEntity;
 import org.closure.gcp.entities.UserEntity;
+
 import org.closure.gcp.models.UserQueryModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepo extends PagingAndSortingRepository<UserEntity,Integer>{
     
-    
+
     Optional<UserEntity> findByEmail(String email);
 
     List<UserEntity> findByCollege(CollegeEntity college);
