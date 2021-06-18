@@ -5,11 +5,7 @@ import java.util.Optional;
 
 import org.closure.gcp.entities.CollegeEntity;
 import org.closure.gcp.entities.UserEntity;
-
-import org.closure.gcp.models.UserQueryModel;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

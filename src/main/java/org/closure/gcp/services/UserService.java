@@ -101,9 +101,9 @@ public class UserService {
     {
         List<Integer> cids = new ArrayList<Integer>();
         cids.add(out_cid);
-        cids.add(in_cid);
+        cids.add(in_cid);           //TODO 
         UserEntity uentity = userRepo.findById(uid).orElseThrow(()-> new UserException("no user with this id"));
-        List<CollegeEntity> centity = collegeRepo.findAllById(cids);
+        List<CollegeEntity> centity = collegeRepo.findAllById(cids).;
         if(centity.size() != 2)
             throw new CollegeException("one or more colleges are not found");
         leaveCollage(uid, out_cid);
