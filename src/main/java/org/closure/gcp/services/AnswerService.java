@@ -45,7 +45,7 @@ public class AnswerService {
     {
         
         AnswerEntity answerEntity = answerRepo
-            .findByAnswer(answer.getAnswer()) 
+            .findById (answer.getId()) 
             .orElseThrow(
                 ()-> new AnswerException("Unable to find an answer with this  ..."));
         
