@@ -23,10 +23,10 @@ public class QuestionService
    public QuestionModel createquestion(QuestionModel question)
    {         
                          
-                for (AnswerModel answermModel : question.getAnswers())
-                {
-                   answerRepo.save( new AnswerEntity().answer(answermModel.getAnswer()));
-                }
+                // for (AnswerModel answermModel : question.getAnswers())
+                // {
+                //    answerRepo.save( new AnswerEntity().answer(answermModel.getAnswer()));
+                // }
 
                 QuestionEntity entity = questionRepo.save(
                 new QuestionEntity().question(question.getQuestion())

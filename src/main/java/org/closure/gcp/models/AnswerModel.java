@@ -3,27 +3,28 @@ package org.closure.gcp.models;
 import java.util.Objects;
 
 public class AnswerModel {
-   private int id;
+   private Integer id;
    private String status;
    private String answer;
    private QuestionModel question;
 
 
+
     public AnswerModel() {
     }
 
-    public AnswerModel(int id, String status, String answer, QuestionModel question) {
+    public AnswerModel(Integer id, String status, String answer, QuestionModel question) {
         this.id = id;
         this.status = status;
         this.answer = answer;
         this.question = question;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,7 +52,7 @@ public class AnswerModel {
         this.question = question;
     }
 
-    public AnswerModel id(int id) {
+    public AnswerModel id(Integer id) {
         setId(id);
         return this;
     }
@@ -79,7 +80,7 @@ public class AnswerModel {
             return false;
         }
         AnswerModel answerModel = (AnswerModel) o;
-        return id == answerModel.id && Objects.equals(status, answerModel.status) && Objects.equals(answer, answerModel.answer) && Objects.equals(question, answerModel.question);
+        return Objects.equals(id, answerModel.id) && Objects.equals(status, answerModel.status) && Objects.equals(answer, answerModel.answer) && Objects.equals(question, answerModel.question);
     }
 
     @Override
@@ -96,5 +97,5 @@ public class AnswerModel {
             ", question='" + getQuestion() + "'" +
             "}";
     }
-
+ 
 }

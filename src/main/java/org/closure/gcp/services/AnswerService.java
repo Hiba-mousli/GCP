@@ -1,5 +1,6 @@
 package org.closure.gcp.services;
 
+import org.closure.gcp.Mapper.AnswerMapper;
 import org.closure.gcp.entities.AnswerEntity;
 import org.closure.gcp.entities.QuestionEntity;
 import org.closure.gcp.exceptions.AnswerException;
@@ -28,69 +29,53 @@ public class AnswerService {
         return answer.id(entity.getId());
     }
 
-    public AnswerModel createAnswerWithQuestion(AnswerModel answer, String question) throws AnswerException
+    public AnswerModel createAnswerWithQuestion(AnswerModel answer, String question)
     {
-        QuestionEntity questionEntity = new QuestionEntity();
-        questionEntity.setQuestion(question);
-        
-        questionEntity = questionRepo
-            .findByQuestion(question)
-            .orElseThrow(
-                ()-> new AnswerException("no question with this value"));
-         AnswerEntity entity = answerRepo.save(
-            new AnswerEntity().answer(answer.getAnswer())
-                              .status(answer.getStatus()));
 
-        return answer.id(entity.getId()).question(new QuestionModel().id(questionEntity.getId())
-                                                                     .points(questionEntity.getPoints())
-                                                                     .question(questionEntity.getQuestion()));                                                   
-                                                                
+    QuestionEntity questionEntity=new QuestionEntity();
+    AnswerEntity entity = answerRepo.save(new AnswerEntity().answer(answer.getAnswer())
+                                                            .status(answer.getStatus()));
+                                                        
+    return answer.id(entity.getId()).question(new QuestionModel().id(questionEntity.getId())
+                                                                 .points(questionEntity.getPoints())
+                                                                 .question(question));
     }
 
-    public AnswerModel ReadAnswer (String answer) throws AnswerException
+    public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
     {
         
         AnswerEntity answerEntity = answerRepo
-            .findByAnswer(answer) 
+            .findByAnswer(answer.getAnswer()) 
             .orElseThrow(
-                ()-> new AnswerException("Unable to find an answer to this number .."));
+                ()-> new AnswerException("Unable to find an answer with this  ..."));
         
-        QuestionEntity questionEntity = questionRepo.findByQuestion((answerEntity.getQuestion()).getQuestion()).orElse(new QuestionEntity());
+    //    QuestionEntity questionEntity = questionRepo.findByQuestion((answerEntity.getQuestion()).getQuestion())
+    //    .orElse(new QuestionEntity());
         return new AnswerModel().id(answerEntity.getId())
                                 .answer(answerEntity.getAnswer())
-                                .status(answerEntity.getStatus())
-                                .question(new QuestionModel().id(questionEntity.getId())
-                                                             .points(questionEntity.getPoints())
-                                                             .question(questionEntity.getQuestion()));
+                                .status(answerEntity.getStatus());
+                                // .question(new QuestionModel().id(questionEntity.getId())
+                                //                              .points(questionEntity.getPoints())
+                                //                              .question(questionEntity.getQuestion()));
     }
 
 
 public AnswerModel updateAnswer (AnswerModel answer) throws AnswerException
 {
-    AnswerEntity answereEntity = answerRepo
-            .findById(answer.getId())
-            .orElseThrow(
-                ()-> new AnswerException("Unable to find an answer to this number ..."));
-QuestionEntity questionEntity = questionRepo.findByQuestion((answer.getQuestion()).getQuestion())
-         .orElse(new QuestionEntity());
-
-         answereEntity = answerRepo.save(
-           new AnswerEntity().answer(answer.getAnswer())
-                          .status(answer.getStatus()));
-
-    return new AnswerModel().id(answereEntity.getId()).question(
-           new QuestionModel().id(questionEntity.getId())
-                              .points(questionEntity.getPoints())
-                              .question(questionEntity.getQuestion()));
+            if( answer.getId() == null )
+                 throw new AnswerException("You didn't enter enough information to update ...");   
+             AnswerEntity entity = answerRepo.findById(answer.getId()).orElseThrow(
+                ()-> new AnswerException("can't update an answer that doesn't actally exist ..."));
+                entity.answer(answer.getAnswer()).status(answer.getStatus());
+                answerRepo.save(entity);
+                return  AnswerMapper.INSTANCE.convertToModel(entity);
 }
 
-public void DeleteAnswer(AnswerModel answer) throws AnswerException
+public AnswerModel DeleteAnswer(AnswerModel answer) throws AnswerException
     {
-        AnswerEntity answereEntity = answerRepo
-        .findById(answer.getId())
-        .orElseThrow(
+        AnswerEntity entity = answerRepo.findById(answer.getId()).orElseThrow(
             ()-> new AnswerException("Unable to find an answer to this number ..."));
-            answerRepo.delete(answereEntity);
-
+        answerRepo.delete(entity);
+        return answer; //AnswerMapper.INSTANCE.convertToListModerl(entity);
     }
 }

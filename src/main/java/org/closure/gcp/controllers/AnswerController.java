@@ -1,5 +1,6 @@
 package org.closure.gcp.controllers;
 
+
 import org.closure.gcp.exceptions.AnswerException;
 import org.closure.gcp.models.AnswerModel;
 import org.closure.gcp.services.AnswerService;
@@ -32,7 +33,7 @@ public class AnswerController {
         }
     }
     @RequestMapping(value="/readanswer", method=RequestMethod.POST)
-    public Object requestMethodRead(@RequestBody String answer) {
+    public Object requestMethodRead(@RequestBody AnswerModel answer) {
         try {
             return answerService.ReadAnswer(answer);
         } catch (AnswerException e) {
@@ -50,11 +51,11 @@ public class AnswerController {
         }
     }
     @RequestMapping(value="/deleteanswer", method=RequestMethod.POST)
-    public void requestMethodDelete(@RequestBody AnswerModel answer) {
+    public Object requestMethodDelete(@RequestBody AnswerModel answer) {
         try {
-         answerService.DeleteAnswer(answer);
+            return answerService.DeleteAnswer(answer);
         } catch (AnswerException e) {
-            e.getMessage();
+            return e.getMessage();
         }
     }
 

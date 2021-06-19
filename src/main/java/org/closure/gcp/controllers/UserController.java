@@ -6,7 +6,6 @@ import org.closure.gcp.exceptions.UserException;
 import org.closure.gcp.models.UserCollegeModel;
 import org.closure.gcp.models.UserModel;
 import org.closure.gcp.models.UserQueryModel;
-import org.closure.gcp.repositories.UserRepo;
 import org.closure.gcp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
