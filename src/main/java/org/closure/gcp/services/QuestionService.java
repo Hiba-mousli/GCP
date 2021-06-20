@@ -39,8 +39,7 @@ public class QuestionService
 
     public QuestionModel readquestion(QuestionModel question) throws QuestionException
     {
-        QuestionEntity questionEntity = questionRepo
-       .findByQuestion(question.getQuestion())
+        QuestionEntity questionEntity = questionRepo.findById(question.getId())
        .orElseThrow( 
            ()-> new QuestionException("Unable to find an question to this .."));
 
