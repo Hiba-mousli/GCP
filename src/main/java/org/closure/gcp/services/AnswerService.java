@@ -43,20 +43,14 @@ public class AnswerService {
 
     public AnswerModel ReadAnswer (AnswerModel answer) throws AnswerException
     {
+
+         
+        AnswerEntity entity = answerRepo.findById(answer.getId()).orElseThrow(
+                ()-> new AnswerException("The answer doesn't actally exist with this ID ..."));
         
-        AnswerEntity answerEntity = answerRepo
-            .findById (answer.getId()) 
-            .orElseThrow(
-                ()-> new AnswerException("Unable to find an answer with this  ..."));
-        
-    //    QuestionEntity questionEntity = questionRepo.findByQuestion((answerEntity.getQuestion()).getQuestion())
-    //    .orElse(new QuestionEntity());
-        return new AnswerModel().id(answerEntity.getId())
-                                .answer(answerEntity.getAnswer())
-                                .status(answerEntity.getStatus());
-                                // .question(new QuestionModel().id(questionEntity.getId())
-                                //                              .points(questionEntity.getPoints())
-                                //                              .question(questionEntity.getQuestion()));
+        return new AnswerModel().id(entity.getId())
+                                .answer(entity.getAnswer())
+                                .status(entity.getStatus());
     }
 
 
@@ -76,6 +70,6 @@ public AnswerModel DeleteAnswer(AnswerModel answer) throws AnswerException
         AnswerEntity entity = answerRepo.findById(answer.getId()).orElseThrow(
             ()-> new AnswerException("Unable to find an answer to this number ..."));
         answerRepo.delete(entity);
-        return answer; //AnswerMapper.INSTANCE.convertToListModerl(entity);
+        return AnswerMapper.INSTANCE.convertToListModerl(entity);
     }
 }

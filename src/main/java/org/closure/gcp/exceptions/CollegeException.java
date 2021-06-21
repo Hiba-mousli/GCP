@@ -6,5 +6,4 @@ public class CollegeException extends RuntimeException{
     {
         super(message);
     }
-    
 }
