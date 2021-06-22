@@ -97,18 +97,18 @@ public class UserService {
         return userEntityToUserModel(uentity);
     }
 
-    public UserModel changeCollege(Integer uid,Integer out_cid,Integer in_cid)
-    {
-        List<Integer> cids = new ArrayList<Integer>();
-        cids.add(out_cid);
-        cids.add(in_cid);           //TODO 
-        UserEntity uentity = userRepo.findById(uid).orElseThrow(()-> new UserException("no user with this id"));
-        List<CollegeEntity> centity = collegeRepo.findAllById(cids).;
-        if(centity.size() != 2)
-            throw new CollegeException("one or more colleges are not found");
-        leaveCollage(uid, out_cid);
-        return joinCollage(uid, in_cid);
-    }
+    // public UserModel changeCollege(Integer uid,Integer out_cid,Integer in_cid)
+    // {
+    //     List<Integer> cids = new ArrayList<Integer>();
+    //     cids.add(out_cid);
+    //     cids.add(in_cid);           //TODO 
+    //     UserEntity uentity = userRepo.findById(uid).orElseThrow(()-> new UserException("no user with this id"));
+    //     List<CollegeEntity> centity = collegeRepo.findAllById(cids).;
+    //     if(centity.size() != 2)
+    //         throw new CollegeException("one or more colleges are not found");
+    //     leaveCollage(uid, out_cid);
+    //     return joinCollage(uid, in_cid);
+    // }
     
     public List<UserQueryModel> queryUsersCollege()
     {
