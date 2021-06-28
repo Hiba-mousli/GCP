@@ -62,18 +62,18 @@ public class UserController {
         }
     }
     
-    @RequestMapping(value="/college/change", method=RequestMethod.POST)
-    public Object changeCollege(@RequestBody UserCollegeModel ucmodel) {
-        try {
-            return userService.changeCollege(ucmodel.getUid(), ucmodel.getOut_cid(), ucmodel.getIn_cid());
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
+    // @RequestMapping(value="/college/change", method=RequestMethod.POST)
+    // public Object changeCollege(@RequestBody UserCollegeModel ucmodel) {
+    //     try {
+    //         return userService.changeCollege(ucmodel.getUid(), ucmodel.getOut_cid(), ucmodel.getIn_cid());
+    //     } catch (Exception e) {
+    //         return e.getMessage();
+    //     }
+    // }
 
     @RequestMapping(value="/with/colleges", method=RequestMethod.GET)
     public List<UserQueryModel> userscollege() {
-        return userService.queryUsersCollege();
+        return userService.queryUsersCollege();//hel
     }
     
     @RequestMapping(value="/paging/{num}/{size}", method=RequestMethod.GET)
