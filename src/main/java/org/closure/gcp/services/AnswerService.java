@@ -70,6 +70,6 @@ public AnswerModel DeleteAnswer(AnswerModel answer) throws AnswerException
         AnswerEntity entity = answerRepo.findById(answer.getId()).orElseThrow(
             ()-> new AnswerException("Unable to find an answer to this number ..."));
         answerRepo.delete(entity);
-        return AnswerMapper.INSTANCE.convertToListModerl(entity);
+        return AnswerMapper.INSTANCE.convertToModel(entity);
     }
 }

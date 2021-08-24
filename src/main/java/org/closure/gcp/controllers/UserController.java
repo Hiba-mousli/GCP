@@ -73,7 +73,7 @@ public class UserController {
 
     @RequestMapping(value="/with/colleges", method=RequestMethod.GET)
     public List<UserQueryModel> userscollege() {
-        return userService.queryUsersCollege();//hel
+        return userService.queryUsersCollege();
     }
     
     @RequestMapping(value="/paging/{num}/{size}", method=RequestMethod.GET)
